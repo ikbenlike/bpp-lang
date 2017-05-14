@@ -1,6 +1,6 @@
 import parser
 
-p = parser.Parser("this + is 'a' thing, \"have\" some")
+p = parser.Parser("this 1243+1 is 'a' thing, \"have\" some")
 p.parse()
 
 i = 0

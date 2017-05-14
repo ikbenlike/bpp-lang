@@ -12,7 +12,7 @@ class Parser:
                 self.children = children
                 self.token = token
         def __init__(self):
-            self.leafs = [self.Leaf() for i in range(100)]
+            self.trunk = None
 
     def __init__(self, text: str):
         self.text = text
@@ -23,7 +23,7 @@ class Parser:
         self.white = "\t\n "
         self.delim = "[]\{\},.@-+!#$%*=()&|"
         self.tokens = []
-        self.keys = ["auto", "extrn", "int", "float", "char"]
+        self.keys = ["auto", "extrn", "int", "float", "char", "fn"]
 
     def parse(self) -> [Token]:
         t = None
@@ -74,8 +74,20 @@ class Parser:
                         self.tokens += [t]
                         self.index += 1
                         self.tindex += 1
+                    elif self.text[self.index - 1] in self.delim:
+                        t = self.Token(self.index - 1, 0)
+                        t.end = self.index 
+                        self.tokens += [t]
+                        self.index += 1
+                        self.tindex += 1
 
     def construct_ast(self) -> AbstractSyntaxTree:
         self.ast = self.AbstractSyntaxTree()
-        self.ast.
+        self.ast.trunk = self.AbstractSyntaxTree.Leaf(None, None, "Ast")
+        for x in self.tokens:
+            if self.text[x.start:x.end] == "+":
+                pass
+
+
+        
 
